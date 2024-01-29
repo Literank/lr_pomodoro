@@ -1,38 +1,77 @@
-.App {
+body {
+  background-color: #F28585;
+  font-family: Geneva, Verdana, Tahoma, sans-serif;
+}
+
+.app {
+  margin: 15vh auto;
+  width: 24rem;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.app-name {
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.segments {
+  margin-top: 2rem;
+}
+
+.segment {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.left-seg {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.right-seg {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.settings {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.setting-btn {
+  padding: 5px 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.picked {
+  background-color: coral;
+}
+
+.card {
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+}
+
+.timer {
+  font-size: 100px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: monospace, 'Courier New', Courier;
+}
+
+.control-btn {
+  padding: 6px 25px;
+  font-size: 36px;
+  background-color: white;
+  border: none;
+  border-bottom: solid 5px lightcoral;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: #F28585;
 }
