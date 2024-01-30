@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import { formatTime } from "./util";
 import Settings from "./components/Settings";
+import Timer from "./components/Timer";
 
 const POMODORO_SECONDS = 25 * 60;
 const BREAK_SECONDS = 5 * 60;
 const PHASE_POMODORO = 0;
 const PHASE_BREAK = 1;
 const DEFAULT_SETTING = {
-  useCircle: false,
+  useCircle: true,
   soundOn: true,
 };
 
@@ -63,6 +63,12 @@ function App() {
     }
   };
 
+  const calcPercentage = () => {
+    const duration =
+      phase === PHASE_POMODORO ? POMODORO_SECONDS : BREAK_SECONDS;
+    return seconds / duration;
+  };
+
   const pickPhase = (phase) => {
     const secBg = "secondary-bg";
     if (phase === PHASE_POMODORO) {
@@ -110,7 +116,11 @@ function App() {
         </span>
       </div>
       <div className="card">
-        <h1 className="timer">{formatTime(seconds)}</h1>
+        <Timer
+          seconds={seconds}
+          percentage={calcPercentage()}
+          useCircle={settings.useCircle}
+        />
         <div>
           <button
             className={`control-btn ${

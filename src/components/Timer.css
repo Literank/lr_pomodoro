@@ -1,0 +1,11 @@
+.timer {
+  font-size: 100px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-family: monospace, "Courier New", Courier;
+}
+
+.circle-wrapper {
+  width: 80%;
+  margin: 1rem auto;
+}
