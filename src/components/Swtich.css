@@ -1,0 +1,55 @@
+.switch-container {
+  --width: 50px;
+  --radius: 24px;
+  --duration: 0.5s;
+}
+
+/* Container for styling purposes */
+.switch-container {
+  position: relative;
+  display: inline-block;
+  width: var(--width);
+  height: var(--radius);
+}
+
+/* Hidden default checkbox input */
+.switch-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The switch background */
+.switch-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: calc(var(--radius) / 2);
+  cursor: pointer;
+  transition: background-color var(--duration) ease;
+}
+
+.switch-on {
+  background-color: var(--button-bg);
+  transition: background-color var(--duration) ease;
+}
+
+/* The switch "thumb" or handle */
+.switch-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--radius);
+  height: var(--radius);
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform var(--duration) ease;
+}
+
+/* Move the switch handle to the right when the checkbox is checked */
+.switch-checkbox:checked + .switch-label .switch-handle {
+  transform: translateX(calc(var(--width) - var(--radius)));
+}

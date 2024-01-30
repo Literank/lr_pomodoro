@@ -1,16 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { formatTime } from "./util";
+import Settings from "./components/Settings";
 
 const POMODORO_SECONDS = 25 * 60;
 const BREAK_SECONDS = 5 * 60;
 const PHASE_POMODORO = 0;
 const PHASE_BREAK = 1;
+const DEFAULT_SETTING = {
+  useCircle: false,
+  soundOn: true,
+};
 
 function App() {
   const [seconds, setSeconds] = useState(POMODORO_SECONDS);
   const [ticking, setTicking] = useState(false);
   const [phase, setPhase] = useState(PHASE_POMODORO);
+  const [showSettings, setShowSettings] = useState(false);
+  const [settings, setSettings] = useState(DEFAULT_SETTING);
 
   useEffect(() => {
     if (seconds === 0) {
@@ -122,8 +129,18 @@ function App() {
         <span className="setting-btn" onClick={() => resetTimer(phase)}>
           Reset
         </span>
-        <span className="setting-btn">Settings</span>
+        <span className="setting-btn" onClick={() => setShowSettings(true)}>
+          Settings
+        </span>
       </div>
+      <Settings
+        show={showSettings}
+        settings={settings}
+        setSettings={setSettings}
+        hideIt={() => {
+          setShowSettings(false);
+        }}
+      />
     </div>
   );
 }

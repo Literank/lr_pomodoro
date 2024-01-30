@@ -1,6 +1,7 @@
 :root {
-  --primary-color: #F28585;
-  --secondary-color: #FFA447;
+  --primary-color: #f28585;
+  --secondary-color: #ffa447;
+  --button-bg: coral;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
 
 .app {
   margin: 15vh auto;
-  width: 24rem;
+  width: 22rem;
   text-align: center;
   color: white;
 }
@@ -56,7 +57,7 @@ body {
 }
 
 .picked {
-  background-color: coral;
+  background-color: var(--button-bg);
 }
 
 .card {
@@ -71,7 +72,7 @@ body {
   font-size: 100px;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  font-family: monospace, 'Courier New', Courier;
+  font-family: monospace, "Courier New", Courier;
 }
 
 .control-btn {
