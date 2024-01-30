@@ -2,11 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Settings from "./components/Settings";
 import Timer from "./components/Timer";
+import { Howl, Howler } from "howler";
 
 const POMODORO_SECONDS = 25 * 60;
 const BREAK_SECONDS = 5 * 60;
 const PHASE_POMODORO = 0;
 const PHASE_BREAK = 1;
+
+// Sounds from https://pixabay.com/sound-effects/search/tick-tock/
+const SOUNDS = {
+  tick: process.env.PUBLIC_URL + "/tick.mp3",
+  alarm: process.env.PUBLIC_URL + "/alarm.mp3",
+  button: process.env.PUBLIC_URL + "/button.mp3",
+};
 const DEFAULT_SETTING = {
   useCircle: true,
   soundOn: true,
@@ -22,12 +30,29 @@ function App() {
   useEffect(() => {
     if (seconds === 0) {
       stopTimer();
-      alarm();
+      // Hacking for Howler.stop() method
+      setTimeout(() => {
+        // alarm
+        playShortSound(SOUNDS.alarm);
+      }, 10);
     }
   }, [seconds]);
 
+  useEffect(() => {
+    if (ticking) {
+      playLoopSound(SOUNDS.tick);
+    } else {
+      stopSound(tickSoundIdRef.current);
+    }
+  }, [ticking]);
+
+  useEffect(() => {
+    Howler.mute(!settings.soundOn);
+  }, [settings.soundOn]);
+
   // use the `useRef` hook to create a mutable object that persists across renders
   const intervalIdRef = useRef(null);
+  const tickSoundIdRef = useRef(null);
 
   const startTimer = () => {
     setTicking(true);
@@ -49,6 +74,7 @@ function App() {
   };
 
   const toggleTimer = () => {
+    playShortSound(SOUNDS.button);
     if (ticking) {
       // Clicked "Pause"
       stopTimer();
@@ -69,6 +95,11 @@ function App() {
     return seconds / duration;
   };
 
+  const skippable = () => {
+    const percentage = calcPercentage();
+    return percentage < 1 && percentage > 0;
+  };
+
   const pickPhase = (phase) => {
     const secBg = "secondary-bg";
     if (phase === PHASE_POMODORO) {
@@ -81,13 +112,30 @@ function App() {
   };
 
   const skipPhase = () => {
+    playShortSound(SOUNDS.button);
     const newPhase = (phase + 1) % 2;
     pickPhase(newPhase);
   };
 
-  const alarm = () => {
-    // TODO: play some sound
-    console.log("Time's up!");
+  const playLoopSound = (url) => {
+    const sound = new Howl({
+      src: [url],
+      loop: true,
+    });
+    tickSoundIdRef.current = sound.play();
+  };
+
+  const playShortSound = (url) => {
+    const sound = new Howl({
+      src: [url],
+    });
+    sound.play();
+  };
+
+  const stopSound = (soundId) => {
+    if (soundId) {
+      Howler.stop(soundId);
+    }
   };
 
   return (
@@ -131,7 +179,7 @@ function App() {
             {ticking ? "Pause" : seconds === 0 ? "Next" : "Start"}
           </button>
         </div>
-        <span className="skip-btn" onClick={skipPhase}>
+        <span hidden={!skippable()} className="skip-btn" onClick={skipPhase}>
           skip
         </span>
       </div>
