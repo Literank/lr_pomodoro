@@ -1,6 +1,15 @@
+:root {
+  --primary-color: #F28585;
+  --secondary-color: #FFA447;
+}
+
 body {
-  background-color: #F28585;
+  background-color: var(--primary-color);
   font-family: Geneva, Verdana, Tahoma, sans-serif;
+}
+
+.secondary-bg {
+  background-color: var(--secondary-color);
 }
 
 .app {
@@ -73,5 +82,17 @@ body {
   border-bottom: solid 5px lightcoral;
   border-radius: 0.5rem;
   cursor: pointer;
-  color: #F28585;
+  color: var(--primary-color);
+}
+
+.skip-btn {
+  font-size: small;
+  cursor: pointer;
+  float: right;
+  margin-top: -1.5rem;
+}
+
+.secondary-control-btn {
+  color: var(--secondary-color);
+  border-bottom-color: goldenrod;
 }
