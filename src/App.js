@@ -173,7 +173,7 @@ function App() {
           <button
             className={`control-btn ${
               phase === PHASE_BREAK ? "secondary-control-btn" : ""
-            }`}
+            } ${ticking ? "pushed" : ""}`}
             onClick={toggleTimer}
           >
             {ticking ? "Pause" : seconds === 0 ? "Next" : "Start"}

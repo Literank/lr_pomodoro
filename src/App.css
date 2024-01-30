@@ -2,15 +2,20 @@
   --primary-color: #f28585;
   --secondary-color: #ffa447;
   --button-bg: coral;
+  --duration: 0.8s;
+  --btn-border-width: 5px;
+  --pushed-btn-border-width: 2px;
 }
 
 body {
   background-color: var(--primary-color);
   font-family: Geneva, Verdana, Tahoma, sans-serif;
+  transition: background-color var(--duration) ease;
 }
 
 .secondary-bg {
   background-color: var(--secondary-color);
+  transition: background-color var(--duration) ease;
 }
 
 .app {
@@ -69,14 +74,21 @@ body {
 }
 
 .control-btn {
+  font-family: monospace, Courier, "Courier New";
   padding: 6px 25px;
   font-size: 36px;
   background-color: white;
   border: none;
-  border-bottom: solid 5px lightcoral;
+  border-bottom: solid var(--btn-border-width) lightcoral;
   border-radius: 0.5rem;
   cursor: pointer;
   color: var(--primary-color);
+}
+
+.pushed {
+  margin-top: calc(var(--btn-border-width) - var(--pushed-btn-border-width));
+  border-width: var(--pushed-btn-border-width);
+  transition: border-width 0.1s ease-out;
 }
 
 .skip-btn {
